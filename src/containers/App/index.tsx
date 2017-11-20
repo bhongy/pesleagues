@@ -10,6 +10,7 @@ import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
 
 import * as fromApp from '../../actions/app';
+import { SuggestPlayer } from '../../components/SuggestPlayer';
 import { User } from '../../models/user';
 import * as fromRoot from '../../reducers';
 import { routes } from '../../routes';
@@ -53,7 +54,9 @@ export class App extends React.PureComponent<ViewModel & Actions, State> {
             <NavLink to="/">
               <Typography type="title" color="inherit">PES League Manager</Typography>
             </NavLink>
-            <div className="flex" />
+            <div className="flex">
+              <SuggestPlayer onSelected={this.handlePlayerSelected} />
+            </div>
             {user ? this.renderUser(user) : this.renderLoginButtons()}
           </Toolbar>
         </AppBar>
@@ -107,6 +110,10 @@ export class App extends React.PureComponent<ViewModel & Actions, State> {
 
   private login = (provider: string) => {
     this.props.login(provider);
+  }
+
+  private handlePlayerSelected = (id: string) => {
+    console.log('select player', id);
   }
 }
 
